@@ -1,0 +1,24 @@
+{
+  "name": "crafters-community-api",
+  "version": "1.0.0",
+  "description": "API for crafters community",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/LDudrey/Crafters-Community-API.git"
+  },
+  "author": "LDudrey",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/LDudrey/Crafters-Community-API/issues"
+  },
+  "homepage": "https://github.com/LDudrey/Crafters-Community-API#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^6.9.2"
+  }
+}
