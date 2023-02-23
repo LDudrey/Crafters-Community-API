@@ -18,7 +18,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     // CREATE a new thought
-    // TODO: thought not attached to User
+    // TODO: created but hitting 404 message, not attaching to user
     createThought(req, res) {
         Thought.create(req.body)
             .then((thought) => {
@@ -73,7 +73,7 @@ module.exports = {
                 !user
                     ? res
                         .status(404)
-                        .json({ message: 'Thought created but no user with this id!' })
+                        .json({ message: 'Thought deleted but no user with this id!' })
                     : res.json({ message: 'Thought successfully deleted!' })
             )
             .catch((err) => res.status(500).json(err));
@@ -93,12 +93,11 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     // DELETE a reaction
-    // TODO: Not workign correctly
     deleteReaction(req, res) {
         Thought.findOneAndUpdate(
             { _id: req.params.thoughtId },
             { $pull: { reactions: { reactionId: req.params.reactionsId } } },
-            { runValidators: true, new: true }
+            { new: true }
         )
             .then((thought) =>
                 !thought
