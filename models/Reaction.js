@@ -1,11 +1,11 @@
-const { Schema } = require('mongoose');
+const { Schema, Types } = require('mongoose');
 
 const reactionSchema = new Schema(
     {
         reactionId: {
             // https://stackoverflow.com/questions/32320342/mongoose-schema-default-value-for-objectid
             type: Schema.Types.ObjectId,
-            default: reactionId.id
+            default: () => new Types.ObjectId(),
         },
         reactionBody: {
             type: String,
@@ -24,6 +24,4 @@ const reactionSchema = new Schema(
     },
 );
 
-const Reaction = model('reaction', reactionSchema);
-
-module.exports = Reaction;
+module.exports = reactionSchema;

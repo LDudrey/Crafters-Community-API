@@ -51,6 +51,7 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     // ADD a friend
+    // TODO: friend count doesnt increase properly
     addFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
