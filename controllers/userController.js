@@ -63,5 +63,20 @@ module.exports = {
         : res.json(user)
         )
         .catch((err) => res.status(500).json(err));
-    }
+    },
+    // DELETE a friend
+    // TODO: how to reference friends in User schema??
+    deleteFriend(req, res) {
+        User.findOneAndUpdate(
+            { _id: req.params.userId },
+            { $pull: { friendsId} },
+            { runValidators: true, new: true }
+        )
+        .then((user) =>
+        !video
+          ? res.status(404).json({ message: 'No user with this ID!' })
+          : res.json(user)
+      )
+      .catch((err) => res.status(500).json(err));
+    },
 };
