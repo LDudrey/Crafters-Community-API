@@ -18,12 +18,11 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     // CREATE a new thought
-    // TODO: created but hitting 404 message, not attaching to user
     createThought(req, res) {
         Thought.create(req.body)
             .then((thought) => {
                 return User.findOneAndUpdate(
-                    { _id: req.params.userId },
+                    { _id: req.body.userId },
                     { $addToSet: { thoughts: thought._id } },
                     { new: true }
                 );
@@ -33,7 +32,7 @@ module.exports = {
                     ? res.status(404).json({
                         message: 'Thought created, but found no user with that ID',
                     })
-                    : res.json('Created the Thought 🎉')
+                    : res.json('Created the Thought!')
             )
             .catch((err) => {
                 console.log(err);

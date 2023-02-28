@@ -51,11 +51,10 @@ module.exports = {
             .catch((err) => res.status(500).json(err));
     },
     // ADD a friend
-    // TODO: friend count doesnt increase properly
     addFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $addToSet: { friends: req.body } },
+            { $addToSet: { friends: req.params.friendId } },
             { new: true }
         )
         .then((user) =>
@@ -66,15 +65,14 @@ module.exports = {
         .catch((err) => res.status(500).json(err));
     },
     // DELETE a friend
-    // TODO: how to reference friends in User schema??
     deleteFriend(req, res) {
         User.findOneAndUpdate(
             { _id: req.params.userId },
-            { $pull: { friendsId} },
-            { runValidators: true, new: true }
+            { $pull: { friends: req.params.friendId} },
+            { new: true }
         )
         .then((user) =>
-        !video
+        !user
           ? res.status(404).json({ message: 'No user with this ID!' })
           : res.json(user)
       )
